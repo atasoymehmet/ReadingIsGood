@@ -1,0 +1,548 @@
+{
+	"info": {
+		"_postman_id": "8e85907e-52f5-477e-9fe4-7e9fb20aa7b2",
+		"name": "ReadingIsGood",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "createCustomer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"customerId\", pm.response.json().id);",
+									"",
+									"postman.setNextRequest(\"getCustomerById\")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\" : \"matasoy\",\n    \"lastName\" : \"atasoy\",\n    \"email\" : \"aaaad.atasoy@test.com\",\n    \"password\": \"12345asdf\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rootUrl}}/api/customer/register",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"api",
+								"customer",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomerById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Authorization}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/api/customer/get/{{customerId}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"api",
+								"customer",
+								"get",
+								"{{customerId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCustomers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Authorization}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/api/customer/all",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"api",
+								"customer",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrdersOfCustomer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Authorization}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customerEmail\" : \"matasoy\",\n    \"pageNumber\" : 1,\n    \"pageSize\" : 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rootUrl}}/api/customer/getorders",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"api",
+								"customer",
+								"getorders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"Authorization\", pm.response.json().token);",
+									"pm.environment.set(\"TokenUpdatedDate\", new Date());",
+									"",
+									"postman.setNextRequest(\"getCustomerById\")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"matasoy\",\n    \"password\" : \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rootUrl}}/authenticate",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "createOrder",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"orderId\", pm.response.json().id);",
+									"",
+									"postman.setNextRequest(\"getOrderById\")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Authorization}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bookIsbnNumber\": \"978-3-16-148410-0\",\n    \"count\": 15,\n    \"customerEmail\": \"mehmet.atasoy@test.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rootUrl}}/api/order/create",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findOrdersByDate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Authorization}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/api/order/between?startDate=2021-09-01&endDate=2021-09-10",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"between"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2021-09-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2021-09-10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllOrders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Authorization}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/api/order/all",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Authorization}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/api/order/get/{{orderId}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"get",
+								"{{orderId}}"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2021-09-01",
+									"disabled": true
+								},
+								{
+									"key": "endDate",
+									"value": "2021-09-10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Authorization}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"isbnNumber\" : \"978-3-16-148410-0\",\n    \"bookName\" : \"Clean Code\",\n    \"stockCount\" : 10,\n    \"price\": 10.35\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rootUrl}}/api/book/add",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"api",
+								"book",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllBooks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Authorization}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/api/book/all",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"api",
+								"book",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateStockInfo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Authorization}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"61314ceb1bfb5c707e86bb09\",\n    \"stock\": 150\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rootUrl}}/api/book/updatestock",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"api",
+								"book",
+								"updatestock"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stat",
+			"item": [
+				{
+					"name": "getCustomerMonthlyStat",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Authorization}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customerEmail\": \"mehmet.atasoy@test.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rootUrl}}/api/statistics/customer-monthly",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"api",
+								"statistics",
+								"customer-monthly"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2021-09-01",
+									"disabled": true
+								},
+								{
+									"key": "endDate",
+									"value": "2021-09-10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "<Basic Auth Username>",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "<Basic Auth Password>",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://petstore.swagger.io/v1",
+			"type": "string"
+		}
+	]
+}
