@@ -10,7 +10,7 @@ ReadingIsGood is an online books retail firm which operates only on the Internet
 * Swagger 2.9.2
 * Docker
 
-### How to start the project ? ###
+# How to start the project ? #
 * I assume that you have already downloaded and installed Docker, JDK 11 (or higher) and Gradle 
 * First navigate to application root folder.
 * Create a jar build for this application using the following command;
@@ -21,11 +21,11 @@ ReadingIsGood is an online books retail firm which operates only on the Internet
   * $ docker-compose up
 * Now you can check the app is up or not;
   * curl --location --request GET 'http://localhost:8080/healthcheck'
-### Swagger UI ###
+# Swagger UI #
 * Please check below url for Swagger UI;
   * localhost:8080/swagger-ui.html#/
 
-### How to authenticate ? ###
+# How to authenticate ? #
 
 Please use below user pass information for authentication;
 
@@ -37,7 +37,7 @@ curl --location --request POST 'http://localhost:8080/authenticate' \
 "password" : "password"
 }'
 
-### How to register as a customer? ###
+# How to register as a customer? #
 
 curl --location --request POST 'http://localhost:8080/api/customer/register' \
 --header 'Content-Type: application/json' \
@@ -49,7 +49,7 @@ curl --location --request POST 'http://localhost:8080/api/customer/register' \
 }'
 
 
-### How to consume API ? ###
+# How to consume API ? #
 
 * First authenticate via "/authenticate" endpoint then get the token and use it as a Bearer Token in all other 
   request except "/api/customer/register", "/healthcheck"
