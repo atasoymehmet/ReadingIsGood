@@ -7,6 +7,6 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class CustomerMonthlyStatCommand {
 
-    @NotBlank
+    @NotBlank(message = "customerEmail can not be blank")
     private String customerEmail;
 }

@@ -2,22 +2,17 @@ package com.getir.readingisgood.api.command.request;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Data
 public class CustomerRegisterCommand {
 
-    @NotNull
-    @NotEmpty
+    @NotBlank(message = "customerEmail can not be blank")
     public String firstName;
-    @NotNull
-    @NotEmpty
+    @NotBlank(message = "customerEmail can not be blank")
     public String lastName;
-    @NotNull
-    @NotEmpty
+    @NotBlank(message = "customerEmail can not be blank")
     private String email;
-    @NotNull
-    @NotEmpty
+    @NotBlank(message = "customerEmail can not be blank")
     private String password;
 }

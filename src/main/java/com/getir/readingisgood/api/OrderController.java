@@ -32,7 +32,6 @@ public class OrderController {
     public ResponseEntity<List<OrderDTO>> findOrdersByDate(
             @RequestParam(name = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(name = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-
         return ResponseEntity.ok(orderService.findAllByDate(startDate, endDate));
     }
 

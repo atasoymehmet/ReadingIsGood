@@ -4,7 +4,7 @@ package com.getir.readingisgood.domain.service;
 import com.getir.readingisgood.api.command.request.AddBookCommand;
 import com.getir.readingisgood.api.command.request.UpdateBookStockCommand;
 import com.getir.readingisgood.api.command.response.BookDTO;
-import com.getir.readingisgood.domain.model.BookStockUpdateException;
+import com.getir.readingisgood.domain.model.exception.BookStockUpdateException;
 
 import java.util.List;
 

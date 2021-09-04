@@ -2,14 +2,12 @@ package com.getir.readingisgood.api.command.request;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Data
 public class CustomerOrdersCommand {
 
-    @NotNull
-    @NotEmpty
+    @NotBlank(message = "customerEmail can not be blank")
     private String customerEmail;
     private Integer pageNumber;
     private Integer pageSize;

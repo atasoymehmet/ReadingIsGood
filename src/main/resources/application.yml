@@ -1,25 +1,11 @@
-security:
-  http:
-    auth-token-header-name: X-API-KEY
-    auth-token: deb4ebf8075d16a33c1083b670137c41
-  jwt:
-    secretKey: 123123456
-    expireTime: 6000000 #in milliseconds
-
-
 spring:
   data:
     mongodb:
 #      username: matasoy
-#      password: matasoy1234
+#      password: password
       host: localhost
       port: 27017
       database: readingisgood
-
-
-
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
 jwt:
   secret: bWF0YXNveWRlcmtpa2l0YXBva3VtYWtvbmVtbGlhbWFhaWxlaGVwc2luZGVuZGFoYW9uZW1saQ==bWF0YXNveWRlcmtpa2l0YXBva3VtYWtvbmVtbGlhbWFhaWxlaGVwc2luZGVuZGFoYW9uZW1saQ==

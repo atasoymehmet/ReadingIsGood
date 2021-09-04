@@ -33,6 +33,4 @@ public class SwaggerConfig {
                 .contact(new Contact("Mehmet Atasoy", "", "test@test.com"))
                 .build();
     }
-    //for Swagger api doc generation
-    //http://localhost:8080/v2/api-docs
 }

@@ -1,8 +1,8 @@
 package com.getir.readingisgood.api;
 
-import com.getir.readingisgood.domain.model.JwtRequest;
-import com.getir.readingisgood.domain.model.JwtResponse;
-import com.getir.readingisgood.security.config.JwtTokenUtil;
+import com.getir.readingisgood.security.model.JwtRequest;
+import com.getir.readingisgood.security.model.JwtResponse;
+import com.getir.readingisgood.security.JwtTokenUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,9 +20,7 @@ import java.util.Objects;
 public class JwtAuthenticationController {
 
 	private final AuthenticationManager authenticationManager;
-
 	private final JwtTokenUtil jwtTokenUtil;
-
 	private final UserDetailsService jwtInMemoryUserDetailsService;
 
 	public JwtAuthenticationController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserDetailsService jwtInMemoryUserDetailsService) {
