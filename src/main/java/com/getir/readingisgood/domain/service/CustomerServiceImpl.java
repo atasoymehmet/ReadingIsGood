@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
         log.debug("Customer register started: {} ", command);
         customerRepository.findByEmail(command.getEmail())
                 .ifPresent(x -> {
-                    throw new CustomerAlreadyExistException();
+                    throw new CustomerAlreadyExistException("Customer is already exist");
                 });
 
         Customer persistRIGCustomer = customerRepository.save(prepareCustomer(command));

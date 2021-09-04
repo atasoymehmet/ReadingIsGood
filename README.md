@@ -56,7 +56,3 @@ curl --location --request POST 'http://localhost:8080/api/customer/register' \
 
 
 * For further information please use postman collection found in the source or Swagger UI.
-
-
-* ![alt text](https://github.com/atasoymehmet/ReadingIsGood/blob/main/Swagger_1.png?raw=true)
-* ![alt text](https://github.com/atasoymehmet/ReadingIsGood/blob/main/Swagger_2.png?raw=true)

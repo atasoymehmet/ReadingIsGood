@@ -1,7 +1,7 @@
 package com.getir.readingisgood.domain.model.exception;
 
-import com.getir.readingisgood.commons.DomainException;
-
-public class BookStockUpdateException extends DomainException {
+public class BookStockUpdateException extends RuntimeException {
+    public BookStockUpdateException(String msg) {
+        super(msg);
+    }
 }
-//TODO exception message yaz

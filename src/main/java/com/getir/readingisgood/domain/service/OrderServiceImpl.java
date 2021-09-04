@@ -6,10 +6,11 @@ import com.getir.readingisgood.api.command.response.BookDTO;
 import com.getir.readingisgood.api.command.response.CustomerDTO;
 import com.getir.readingisgood.api.command.response.OrderDTO;
 import com.getir.readingisgood.converter.OrderDTOConverter;
-import com.getir.readingisgood.domain.model.exception.BookStockUpdateException;
-import com.getir.readingisgood.domain.model.exception.NoBookFoundException;
 import com.getir.readingisgood.domain.model.Order;
 import com.getir.readingisgood.domain.model.OrderStatus;
+import com.getir.readingisgood.domain.model.exception.BookIsOutOfStockException;
+import com.getir.readingisgood.domain.model.exception.BookStockUpdateException;
+import com.getir.readingisgood.domain.model.exception.NoBookFoundException;
 import com.getir.readingisgood.domain.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.ValidationException;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
@@ -46,13 +46,13 @@ public class OrderServiceImpl implements OrderService {
             if (!Objects.nonNull(book)) {
                 log.error("Order createOrder error: No book found. bookIsbnNumber: {}", bookIsbnNumber);
 
-                throw new NoBookFoundException();
+                throw new NoBookFoundException("No book found");
             }
             CustomerDTO customerDTO = customerService.getCustomerDetailByEmail(customerMail);
             if (book.getStockCount() < count) {
                 log.error("Order createOrder error: Book is out of stock. Book StockCount(): {} requestedCount(): {}",
                         book.getStockCount(), count);
-                throw new ValidationException("Book is out of stock.");
+                throw new BookIsOutOfStockException("Book is out of stock.");
             }
 
             Long newStock = book.getStockCount() - count;
@@ -70,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
             return orderDTO;
         } catch (Exception e) {
             log.error("OrderService::createOrder error: {}", e.getMessage());
-            throw new BookStockUpdateException();
+            throw new BookStockUpdateException("Stock update exception");
         } finally {
             if (reentrantLock.isHeldByCurrentThread()) {
                 reentrantLock.unlock();

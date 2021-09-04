@@ -31,7 +31,7 @@ public class BookServiceImpl implements BookService {
         log.debug("Book: Add Book started: {} ", command);
         bookRepository.findBookByIsbnNumber(command.getIsbnNumber())
                 .ifPresent(x -> {
-                    throw new BookAlreadyExistException();
+                    throw new BookAlreadyExistException("This book is already exist.");
                 });
         BookDTO bookDTO = bookDTOConverter.convert(bookRepository.save(Book.builder()
                 .bookName(command.getBookName())
@@ -69,7 +69,7 @@ public class BookServiceImpl implements BookService {
 
         } catch (Exception e) {
             log.error("Book: The stock info could not be updated. BookId : {}", command.getId());
-            throw new BookStockUpdateException();
+            throw new BookStockUpdateException("Stock update exception");
         }
     }
 

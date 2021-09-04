@@ -1,7 +1,7 @@
 package com.getir.readingisgood.domain.model.exception;
 
-import com.getir.readingisgood.commons.DomainException;
-
-public class CustomerAlreadyExistException extends DomainException {
+public class CustomerAlreadyExistException extends RuntimeException {
+    public CustomerAlreadyExistException(String msg) {
+        super(msg);
+    }
 }
-//TODO exception message yaz
