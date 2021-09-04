@@ -14,7 +14,7 @@ ReadingIsGood is an online books retail firm which operates only on the Internet
 * I assume that you have already downloaded and installed Docker, JDK 11 (or higher) and Gradle 
 * First navigate to application root folder.
 * Create a jar build for this application using the following command;
-  * $ ./gradlew clean build
+  * $ ./gradlew clean -x test build
 * Then create the build with docker compose to build docker image using built jar file;
   * $ docker-compose build
 * Then use following command to run whole setup using docker compose;
